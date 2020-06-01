@@ -69,6 +69,11 @@ class manager:
             print("Creating the DataBase")
             db = sqlite3.connect("connection")
             time.sleep(3)
+
+            cursor = db.cursor()
+            cursor.execute("""CREATE TABLE products
+                            (store TEXT, model TEXT, serial_number TEXT)""")
+
             print("Connection already Created")
             time.sleep(3)
             print("Database created sucessfuly")

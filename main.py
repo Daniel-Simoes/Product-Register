@@ -10,7 +10,29 @@ class manager:
         self.serial_number = ""
 
     def add(self):
-        pass
+        running = True
+        while running:
+            os.system("cls")
+            print("---------------ADD A PRODUCT---------------")
+            self.store = input("Store :")
+            time.sleep(0.2)
+            self.model = input("Model :")
+            time.sleep(0.2)
+            self.serial_number = input("Serial_Number :")
+            db = sqlite3.connect("connection")
+            cursor = db.cursor()
+            cursor.execute(""" INSERT INTO products\
+                            (Store, Model, Serial_Number )VALUES(?,?,?)""", (self.store, self.model, self.serial_number))
+            db.commit()
+            add_more = input("Would you like to do another register? (Y/N):")
+            if add_more == "y".lower():
+                continue
+            else:
+                db.close()
+                running = False
+                print("Thank you for add your product!")
+                time.sleep(2)
+                self.menu()
 
     def update(self):
         pass
@@ -55,7 +77,7 @@ class manager:
             self.menu()
 
     def main(self):
-        os.system("cli")
+        os.system("cls")
         if os.path.isfile("connection"):
             db = sqlite3.connect("connection")
             time.sleep(3)
@@ -80,5 +102,5 @@ class manager:
             self.menu()
 
 
-contacts_manager = manager()
-contacts_manager.main()
+products_manager = manager()
+products_manager.main()

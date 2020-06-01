@@ -44,7 +44,7 @@ class manager:
             self.remove()
 
         elif opt == 4:
-            self.list()
+            self.get_list()
 
         elif opt == 5:
             self.terminate()
@@ -52,10 +52,27 @@ class manager:
         else:
             opt > 5
             print("Type a number between 1 and 5")
+            self.menu()
 
     def main(self):
         os.system("cli")
-        self.menu()
+        if os.path.isfile("connection"):
+            db = sqlite3.connect("connection")
+            time.sleep(3)
+            print("DataBase Connected")
+            time.sleep(3)
+            self.menu()
+
+        else:
+            print("DataBase does not exist")
+            time.sleep(3)
+            print("Creating the DataBase")
+            db = sqlite3.connect("connection")
+            time.sleep(3)
+            print("Connection already Created")
+            time.sleep(3)
+            print("Database created sucessfuly")
+            self.menu()
 
 
 contacts_manager = manager()

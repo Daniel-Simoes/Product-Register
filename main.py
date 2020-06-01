@@ -1,7 +1,6 @@
 import sqlite3
 import os
 import time
-import winsound
 
 
 class manager:
@@ -25,5 +24,18 @@ class manager:
     def terminate(self):
         pass
 
-    def get_list(self):
-        pass
+    def menu(self):
+        os.system("cli")
+        print("---------------MENU---------------")
+        print("1 :) Add")
+        print("1 :) Update")
+        print("1 :) Remove")
+        print("1 :) List")
+        print("1 :) Terminate")
+
+    def main(self):
+        self.menu()
+
+
+contacts_manager = manager()
+contacts_manager.main()

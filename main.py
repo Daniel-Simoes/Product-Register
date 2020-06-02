@@ -12,7 +12,6 @@ class manager:
     def add(self):
         running = True
         while running:
-            os.system("cls")
             print("---------------ADD A PRODUCT---------------")
             self.store = input("Store :")
             time.sleep(0.2)
@@ -22,7 +21,8 @@ class manager:
             db = sqlite3.connect("connection")
             cursor = db.cursor()
             cursor.execute(""" INSERT INTO products\
-                            (Store, Model, Serial_Number )VALUES(?,?,?)""", (self.store, self.model, self.serial_number))
+                           (Store, Model, Serial_Number )VALUES(?,?,?)""",
+                           (self.store, self.model, self.serial_number))
             db.commit()
             add_more = input("Would you like to do another register? (Y/N):")
             if add_more == "y".lower():
@@ -41,13 +41,22 @@ class manager:
         pass
 
     def get_list(self):
-        pass
+        count = 0
+        count_2 = 0
+        db = sqlite3.connect("connection")
+        cursor = db.cursor()
+        os.system("cls")
+        print("---------------Regiters---------------")
+        time.sleep(5)
+        cursor.execute("SELECT store, model, serial_number FROM products")
+        results = cursor.fetchall()
+        print(results)
+        time.sleep(0.50)
 
     def terminate(self):
         pass
 
     def menu(self):
-        os.system("cli")
         print("---------------MENU---------------")
         print("1 :) Add")
         print("2 :) Update")
@@ -77,7 +86,6 @@ class manager:
             self.menu()
 
     def main(self):
-        os.system("cls")
         if os.path.isfile("connection"):
             db = sqlite3.connect("connection")
             time.sleep(3)
@@ -99,7 +107,7 @@ class manager:
             print("Connection already Created")
             time.sleep(3)
             print("Database created sucessfuly")
-            self.menu()
+        self.menu()
 
 
 products_manager = manager()

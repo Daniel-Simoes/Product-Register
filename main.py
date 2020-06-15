@@ -26,6 +26,15 @@ def get_product(item):
     print('Store: ', PRODUCTS[item]['Store'])
 
 
+def add_product(item, Model, Year, Store):
+    PRODUCTS[item] = {
+        'Model': 'Model',
+        'Year': 'Year',
+        'Store': 'Store',
+    }
+    print('>>>Product{}add'.format(item))
+
+
 def show_menu():
     print('-------------------------------------------------------')
     print('1 - Show all Products')
@@ -44,3 +53,6 @@ option = input('CHOSE A OPTION: ')
 
 if option == '1':
     show_products()
+elif option == '2':
+    item = input('Type The Serial Number: ')
+    get_product(item)

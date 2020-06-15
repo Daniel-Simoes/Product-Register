@@ -26,13 +26,20 @@ def get_product(item):
     print('Store: ', PRODUCTS[item]['Store'])
 
 
+def item_details():
+    model = input('Type The Model: ')
+    year = input('Type The Year: ')
+    store = input('Type The Store: ')
+    return model, year, store
+
+
 def add_product(item, Model, Year, Store):
     PRODUCTS[item] = {
         'Model': 'Model',
         'Year': 'Year',
         'Store': 'Store',
     }
-    print('>>>Product{}add'.format(item))
+    print('>>>The Serial Number:{} was add'.format(Model))
 
 
 def show_menu():
@@ -56,3 +63,12 @@ if option == '1':
 elif option == '2':
     item = input('Type The Serial Number: ')
     get_product(item)
+elif option == '3':
+    item = input('Type the Serial Number: ')
+
+    try:
+        PRODUCTS[item]
+        print('>>>> Product already Registed')
+    except KeyError:
+        model, year, store = item_details()
+        add_product(item, model, year, store)

@@ -39,7 +39,7 @@ def add_product(item, Model, Year, Store):
         'Year': 'Year',
         'Store': 'Store',
     }
-    print('>>>The Serial Number:{} was add'.format(Model))
+    print('>>>The Serial Number:{} was add'.format(item))
 
 
 def show_menu():
@@ -72,3 +72,13 @@ elif option == '3':
     except KeyError:
         model, year, store = item_details()
         add_product(item, model, year, store)
+elif option == '4':
+    item = input('Type the Serial Number: ')
+
+    try:
+        PRODUCTS[item]
+        print('>>>> updating Item:', item)
+        model, year, store = item_details()
+        add_product(item, model, year, store)
+    except KeyError:
+        print('>>>> Product already Registed')

@@ -14,9 +14,12 @@ PRODUCTS['987654321'] = {
 
 
 def show_products():
-    for item in PRODUCTS:
-        get_product(item)
-        print('-------------------------------------------------------')
+    if PRODUCTS:
+        for item in PRODUCTS:
+            get_product(item)
+            
+    else:
+        print('The application does not have any Register')
 
 
 def get_product(item):
@@ -25,6 +28,7 @@ def get_product(item):
         print('Model: ', PRODUCTS[item]['Model'])
         print('Year: ', PRODUCTS[item]['Year'])
         print('Store: ', PRODUCTS[item]['Store'])
+        print('-------------------------------------------------------')
     except KeyError:
         print('>>>> Item does not found')
     except Exception as error:
@@ -60,14 +64,30 @@ def delete_item(item):
         print('>>>> Sorry, we had a problem and we are work to fix it')
         print(error)
 
+def export_items(filename):
+    try:
+        with open('registers.csv', 'w') as file:
+            for item in PRODUCTS:
+                model = PRODUCTS[item]['Model']
+                year = PRODUCTS[item]['Year']
+                store = PRODUCTS[item]['Store']
+                file.write(">>>Serial Number: {}\n Model: {}\n Year: {}\n Store: {}\n".format(item, model, year, store))
+        print('>>>> Products exported!')
+    except Exception as error:
+        print('>>>> Sorry, we had a problem and we are work to fix it')
+        print(error)
+
+
+
 
 def show_menu():
     print('-------------------------------------------------------')
-    print('1 - Show all Products')
-    print('2 - Get a product')
+    print('1 - List Products')
+    print('2 - Show a product')
     print('3 - Add a product')
     print('4 - Update a product')
     print('5 - Delete a product')
+    print('6 - Export products list')
     print('0 - Logout application')
     print('-------------------------------------------------------')
 
@@ -100,10 +120,14 @@ while True:
             model, year, store = item_details()
             add_product(item, model, year, store)
         except KeyError:
-            print('>>>> Product already Registed')
+            print('>>>> Product does not exist')
+
     elif option == '5':
         item = input('Type the Serial Number: ')
         delete_item(item)
+    elif option == '6':
+        filename = input('Type the Serial Number: ')
+        export_items(filename)
     elif option == '0':
         print('')
     else:

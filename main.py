@@ -6,7 +6,7 @@ def show_products():
             get_product(item)
             
     else:
-        print('The application does not have any Register')
+        print('-----------The application does not have any Registration!----------')
 
 
 def get_product(item):
@@ -15,11 +15,11 @@ def get_product(item):
         print('Model: ', PRODUCTS[item]['model'])
         print('Year: ', PRODUCTS[item]['year'])
         print('Store: ', PRODUCTS[item]['store'])
-        print('-------------------------------------------------------')
+        print('--------------------------------------------------------------------')
     except KeyError:
-        print('>>>> Item does not found')
+        print('---------------------Serial Number has not found--------------------')
     except Exception as error:
-        print('>>>> Sorry, we had a problem and we are work to fix it')
+        print('----Sorry, We had a problem and the time are work to fix it soon----')
         print(error)
 
 
@@ -37,7 +37,7 @@ def add_product(item, model, year, store):
         'store': store,
     }
     salve()
-    print('>>>The Serial Number:{} was add'.format(item))
+    print('-------The Serial Number:{} was added successfully-------'.format(item))
 
 
 def delete_item(item):
@@ -45,12 +45,12 @@ def delete_item(item):
         PRODUCTS.pop(item)
         salve()
         print()
-        print('>>>> The Serial Number: {} was deleted'.format(item))
+        print('-------The Serial Number:{} was deleted successfully-------'.format(item))
         print()
     except KeyError:
-        print('>>>> Serial Number does not exist')
+        print('---------------------Serial Number has not found--------------------')
     except Exception as error:
-        print('>>>> Sorry, we had a problem and we are work to fix it')
+        print('----Sorry, We had a problem and the time are work to fix it soon----')
         print(error)
 
 def export_items(filename):
@@ -60,10 +60,12 @@ def export_items(filename):
                 model = PRODUCTS[item]['model']
                 year = PRODUCTS[item]['year']
                 store = PRODUCTS[item]['store']
-                file.write(">>>Serial Number: {},{},{},{}\n".format(item, model, year, store))
-        print('>>>> Products exported!')
+                
+                file.write(">>>Serial Number: {}\n Model: {}\n Year: {}\n Store: {}\n".format(item, model, year, store))
+
+        print('----------------Products was exported successfully------------------')
     except Exception as error:
-        print('>>>> Sorry, we had a problem and we are work to fix it')
+        print('----Sorry, We had a problem and the time are work to fix it soon----')
         print(error)
 
 
@@ -81,9 +83,9 @@ def import_items(filename):
 
                 add_product(item, model, year, store)
     except FileNotFoundError:
-        print('>>>> file doe not exist')
+        print('------------------------File was not found--------------------------')
     except Exception as error:
-        print('>>>> Sorry, we had a problem and we are work to fix it')
+        print('----Sorry, We had a problem and the time are work to fix it soon----')
         print(error)
 
 def salve():
@@ -106,17 +108,17 @@ def load():
                     'year': year,
                     'store': store
                 }
-        print('>>>> Database loaded')
+        print('------------------Database was loaded successfully------------------')
         print('>>>> {} products loaded'.format(len(PRODUCTS)))
     except FileNotFoundError:
-        print('>>>> file doe not exist')
+        print('------------------------File was not found--------------------------')
     except Exception as error:
-        print('>>>> Sorry, we had a problem and we are work to fix it')
+        print('----Sorry, We had a problem and the time are work to fix it soon----')
         print(error)
 
 
 def show_menu():
-    print('-------------------------------------------------------')
+    print('--------------------------------------------------------------------')
     print('1 - List Products')
     print('2 - Show a product')
     print('3 - Add a product')
@@ -125,7 +127,7 @@ def show_menu():
     print('6 - Export products list')
     print('7 - Import products list')
     print('0 - Logout application')
-    print('-------------------------------------------------------')
+    print('--------------------------------------------------------------------')
 
 load()
 while True:

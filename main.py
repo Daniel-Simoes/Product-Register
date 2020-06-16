@@ -78,7 +78,24 @@ def export_items(filename):
         print(error)
 
 
+def import_items(filename):
+    try:
+        with open(filename, 'r') as file:
+            registers = file.readlines()
+            for register in registers:
+                details = register.strip().split(',')
 
+                item = details[0]
+                model = details[1]
+                year = details[2]
+                store = details[3]
+
+                add_product(item, model, year, store)
+    except FileNotFoundError:
+        print('>>>> Arquivo não encontrado')
+    except Exception as error:
+        print('>>>> Algum erro inesperado ocorreu')
+        print(error)
 
 def show_menu():
     print('-------------------------------------------------------')
@@ -88,6 +105,7 @@ def show_menu():
     print('4 - Update a product')
     print('5 - Delete a product')
     print('6 - Export products list')
+    print('7 - Import products list')
     print('0 - Logout application')
     print('-------------------------------------------------------')
 
@@ -128,6 +146,9 @@ while True:
     elif option == '6':
         filename = input('Type the Serial Number: ')
         export_items(filename)
+    elif option == '7':
+        filename = input('Type the Filename: ')
+        import_items(filename)
     elif option == '0':
         print('')
     else:

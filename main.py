@@ -1,18 +1,5 @@
 PRODUCTS = {}
 
-PRODUCTS['123456789'] = {
-    'Model': 'Telecaster Squier DELUXE',
-    'Year': '2020',
-    'Store': 'Thomman',
-}
-
-PRODUCTS['987654321'] = {
-    'Model': 'Stratocaster Fender',
-    'Year': '2019',
-    'Store': 'Milsons',
-}
-
-
 def show_products():
     if PRODUCTS:
         for item in PRODUCTS:
@@ -25,9 +12,9 @@ def show_products():
 def get_product(item):
     try:
         print('Serial Number: ', item)
-        print('Model: ', PRODUCTS[item]['Model'])
-        print('Year: ', PRODUCTS[item]['Year'])
-        print('Store: ', PRODUCTS[item]['Store'])
+        print('Model: ', PRODUCTS[item]['model'])
+        print('Year: ', PRODUCTS[item]['year'])
+        print('Store: ', PRODUCTS[item]['store'])
         print('-------------------------------------------------------')
     except KeyError:
         print('>>>> Item does not found')
@@ -43,18 +30,20 @@ def item_details():
     return model, year, store
 
 
-def add_product(item, Model, Year, Store):
+def add_product(item, model, year, store):
     PRODUCTS[item] = {
-        'Model': 'Model',
-        'Year': 'Year',
-        'Store': 'Store',
+        'model': model,
+        'year': year,
+        'store': store,
     }
+    salve()
     print('>>>The Serial Number:{} was add'.format(item))
 
 
 def delete_item(item):
     try:
         PRODUCTS.pop(item)
+        salve()
         print()
         print('>>>> The Serial Number: {} was deleted'.format(item))
         print()
@@ -66,12 +55,12 @@ def delete_item(item):
 
 def export_items(filename):
     try:
-        with open('registers.csv', 'w') as file:
+        with open(filename, 'w') as file:
             for item in PRODUCTS:
-                model = PRODUCTS[item]['Model']
-                year = PRODUCTS[item]['Year']
-                store = PRODUCTS[item]['Store']
-                file.write(">>>Serial Number: {}\n Model: {}\n Year: {}\n Store: {}\n".format(item, model, year, store))
+                model = PRODUCTS[item]['model']
+                year = PRODUCTS[item]['year']
+                store = PRODUCTS[item]['store']
+                file.write(">>>Serial Number: {},{},{},{}\n".format(item, model, year, store))
         print('>>>> Products exported!')
     except Exception as error:
         print('>>>> Sorry, we had a problem and we are work to fix it')
@@ -92,10 +81,39 @@ def import_items(filename):
 
                 add_product(item, model, year, store)
     except FileNotFoundError:
-        print('>>>> Arquivo não encontrado')
+        print('>>>> file doe not exist')
     except Exception as error:
-        print('>>>> Algum erro inesperado ocorreu')
+        print('>>>> Sorry, we had a problem and we are work to fix it')
         print(error)
+
+def salve():
+    export_items('database.csv')
+
+def load():
+    try:
+        with open('database.csv', 'r') as file:
+            registers = file.readlines()
+            for register in registers:
+                details = register.strip().split(',')
+
+                item = details[0]
+                model = details[1]
+                year = details[2]
+                store = details[3]
+
+                PRODUCTS[item] = {
+                    'model': model,
+                    'year': year,
+                    'store': store
+                }
+        print('>>>> Database loaded')
+        print('>>>> {} products loaded'.format(len(PRODUCTS)))
+    except FileNotFoundError:
+        print('>>>> file doe not exist')
+    except Exception as error:
+        print('>>>> Sorry, we had a problem and we are work to fix it')
+        print(error)
+
 
 def show_menu():
     print('-------------------------------------------------------')
@@ -109,7 +127,7 @@ def show_menu():
     print('0 - Logout application')
     print('-------------------------------------------------------')
 
-
+load()
 while True:
     show_menu()
 

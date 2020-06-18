@@ -8,7 +8,7 @@ def show_products():
             get_product(item)
             
     else:
-        print('-----------The application does not have any Registration!----------')
+        print('>>>>>> The application does not have any Registration.')
         
 
 
@@ -20,9 +20,9 @@ def get_product(item):
         print('Store: ', PRODUCTS[item]['store'])
         print('--------------------------------------------------------------------')
     except KeyError:
-        print('-----------------The serial number was not found--------------------')
+        print('>>>>>> The serial number was not found.')
     except Exception as error:
-        print('----Sorry, We had a problem and the time are work to fix it soon----')
+        print('>>>>>> Sorry, We had a problem and the time are work to fix it soon.')
         print(error)
 
 
@@ -40,11 +40,11 @@ def add_product(item, model, year, store):
         'store': store,
     }
 
-    print('---------------We are saving the item on database-------------------')
+    print('>>>>>> We are saving the item on database...')
     time.sleep(3)
     salve()
     
-    print('-------The Serial Number:{} was added successfully-------'.format(item))
+    print('>>>>>> The Serial Number: {} was added successfully.'.format(item))
     time.sleep(2)
 
 
@@ -53,12 +53,12 @@ def delete_item(item):
         PRODUCTS.pop(item)
         salve()
         print()
-        print('-------The Serial Number:{} was deleted successfully-------'.format(item))
+        print('>>>>>> The Serial Number: {} was deleted successfully.'.format(item))
         print()
     except KeyError:
-        print('---------------------Serial Number was not found--------------------')
+        print('>>>>>> Serial Number was not found.')
     except Exception as error:
-        print('----Sorry, We had a problem and the time are work to fix it soon----')
+        print('>>>>>> Sorry, We had a problem and the time are work to fix it soon.')
         print(error)
 
 def export_items(filename):
@@ -69,11 +69,11 @@ def export_items(filename):
                 year = PRODUCTS[item]['year']
                 store = PRODUCTS[item]['store']
                 
-                file.write(">>>Serial Number: {}\n Model: {}\n Year: {}\n Store: {}\n".format(item, model, year, store))
+                file.write(">>>>>> Serial Number: {}\n Model: {}\n Year: {}\n Store: {}\n".format(item, model, year, store))
         
         #print('----------------The items was exported successfully-----------------')
     except Exception as error:
-        print('----Sorry, We had a problem and the time are work to fix it soon----')
+        print('>>>>>> Sorry, We had a problem and the time are work to fix it soon.')
         print(error)
 
 
@@ -91,9 +91,9 @@ def import_items(filename):
 
                 add_product(item, model, year, store)
     except FileNotFoundError:
-        print('--------------------The file was not found--------------------------')
+        print('>>>>>> The file was not found.')
     except Exception as error:
-        print('----Sorry, We had a problem and the time are work to fix it soon----')
+        print('>>>>>> Sorry, We had a problem and the time are work to fix it soon.')
         print(error)
 
 def salve():
@@ -116,12 +116,12 @@ def load():
                     'year': year,
                     'store': store
                 }
-        print('--------------The database was loaded successfully------------------')
-        print('>>>> {} products loaded'.format(len(PRODUCTS)))
+        print('>>>>>> The database was loaded successfully.')
+        print('>>>>>> {} products loaded.'.format(len(PRODUCTS)))
     except FileNotFoundError:
-        print('--------------------The file was not found--------------------------')
+        print('>>>>>> The file was not found.')
     except Exception as error:
-        print('----Sorry, We had a problem and the time are work to fix it soon----')
+        print('>>>>>> Sorry, We had a problem and the time are work to fix it soon.')
         print(error)
 
 
@@ -145,14 +145,13 @@ while True:
 
     if option == '1':
         time.sleep(0.5)
-        print('Database is loading the product list...')
+        print('>>>>>> Database is loading the product list...')
         time.sleep(3)
         show_products()
         time.sleep(2)
     elif option == '2':
         item = input('Type The Serial Number: ')
-        time.sleep(0.5)
-        print('Database is loading the item...')
+        print('Database is looking for the item...')
         time.sleep(3)
         get_product(item)
     elif option == '3':
@@ -160,7 +159,7 @@ while True:
 
         try:
             PRODUCTS[item]
-            print('>>>> Product already Registed')
+            print('Product already Registed.')
         except KeyError:
             model, year, store = item_details()
             add_product(item, model, year, store)
@@ -169,11 +168,11 @@ while True:
 
         try:
             PRODUCTS[item]
-            print('>>>> updating Item:', item)
+            print('>>>>>> Updating Item', item,'...')
             model, year, store = item_details()
             add_product(item, model, year, store)
         except KeyError:
-            print('>>>> Product does not exist')
+            print('Product does not exist.')
 
     elif option == '5':
         item = input('Type the Serial Number: ')
@@ -192,4 +191,4 @@ while True:
     elif option == '0':
         print('')
     else:
-        print('Type a Valide Number')
+        print('Type a Valide Number.')

@@ -39,10 +39,10 @@ def add_product(item, model, year, store):
         'year': year,
         'store': store,
     }
-
+    save()
     print('>>>>>> We are saving the item on database...')
     time.sleep(3)
-    salve()
+   
     
     print('>>>>>> The Serial Number: {} was added successfully.'.format(item))
     time.sleep(2)
@@ -51,7 +51,7 @@ def add_product(item, model, year, store):
 def delete_item(item):
     try:
         PRODUCTS.pop(item)
-        salve()
+        save()
         print()
         print('>>>>>> The Serial Number: {} was deleted successfully.'.format(item))
         print()
@@ -69,7 +69,7 @@ def export_items(filename):
                 year = PRODUCTS[item]['year']
                 store = PRODUCTS[item]['store']
                 
-                file.write(">>>>>> Serial Number: {}\n Model: {}\n Year: {}\n Store: {}\n".format(item, model, year, store))
+                file.write("{},{},{},{}\n".format(item, model, year, store))
         
         #print('----------------The items was exported successfully-----------------')
     except Exception as error:
@@ -96,7 +96,7 @@ def import_items(filename):
         print('>>>>>> Sorry, We had a problem and the time are work to fix it soon.')
         print(error)
 
-def salve():
+def save():
     export_items('database.csv')
 
 def load():
@@ -114,7 +114,7 @@ def load():
                 PRODUCTS[item] = {
                     'model': model,
                     'year': year,
-                    'store': store
+                    'store': store,
                 }
         print('>>>>>> The database was loaded successfully.')
         print('>>>>>> {} products loaded.'.format(len(PRODUCTS)))

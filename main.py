@@ -8,10 +8,8 @@ def show_products():
             get_product(item)
             
     else:
-        print('>>>>>> The application does not have any Registration.')
+        print('>>>>>> The application does not have any registration.')
         
-
-
 def get_product(item):
     try:
         print('Serial Number: ', item)
@@ -22,16 +20,14 @@ def get_product(item):
     except KeyError:
         print('>>>>>> The serial number was not found.')
     except Exception as error:
-        print('>>>>>> Sorry, We had a problem and the time are work to fix it soon.')
+        print('>>>>>> Sorry, We had a problem and our team are working to fix it soon.')
         print(error)
-
 
 def item_details():
     model = input('Type The Model: ')
     year = input('Type The Year: ')
     store = input('Type The Store: ')
     return model, year, store
-
 
 def add_product(item, model, year, store):
     PRODUCTS[item] = {
@@ -42,23 +38,18 @@ def add_product(item, model, year, store):
     save()
     print('>>>>>> We are saving the item on database...')
     time.sleep(3)
-   
-    
     print('>>>>>> The Serial Number: {} was added successfully.'.format(item))
     time.sleep(2)
-
 
 def delete_item(item):
     try:
         PRODUCTS.pop(item)
         save()
-        print()
         print('>>>>>> The Serial Number: {} was deleted successfully.'.format(item))
-        print()
     except KeyError:
         print('>>>>>> Serial Number was not found.')
     except Exception as error:
-        print('>>>>>> Sorry, We had a problem and the time are work to fix it soon.')
+        print('>>>>>> >>>>>> Sorry, We had a problem and our team are working to fix it soon.')
         print(error)
 
 def export_items(filename):
@@ -71,11 +62,10 @@ def export_items(filename):
                 
                 file.write("{},{},{},{}\n".format(item, model, year, store))
         
-        #print('----------------The items was exported successfully-----------------')
+        #print('>>>>>> The items was exported successfully')
     except Exception as error:
-        print('>>>>>> Sorry, We had a problem and the time are work to fix it soon.')
+        print('>>>>>> Sorry, We had a problem and our team are working to fix it soon.')
         print(error)
-
 
 def import_items(filename):
     try:
@@ -93,7 +83,7 @@ def import_items(filename):
     except FileNotFoundError:
         print('>>>>>> The file was not found.')
     except Exception as error:
-        print('>>>>>> Sorry, We had a problem and the time are work to fix it soon.')
+        print('>>>>>> Sorry, We had a problem and our team are working to fix it soon.')
         print(error)
 
 def save():
@@ -120,18 +110,17 @@ def load():
         time.sleep(3)
         print('>>>>>> The database was loaded successfully.')
         time.sleep(2)
-        print('>>>>>> {} products loaded.'.format(len(PRODUCTS)))
+        print('>>>>>> {} product(s) loaded.'.format(len(PRODUCTS)))
         time.sleep(3)
     except FileNotFoundError:
         print('>>>>>> The file was not found.')
     except Exception as error:
-        print('>>>>>> Sorry, We had a problem and the time are work to fix it soon.')
+        print('>>>>>> Sorry, We had a problem and our team are working to fix it soon.')
         print(error)
-
 
 def show_menu():
     print('--------------------------------------------------------------------')
-    print('1 - List Products')
+    print('1 - List products')
     print('2 - Show a product')
     print('3 - Add a product')
     print('4 - Update a product')
@@ -144,12 +133,10 @@ def show_menu():
 load()
 while True:
     show_menu()
-
-    option = input('CHOSE A OPTION: ')
-
+    option = input('CHOOSE AN OPTION: ')
     if option == '1':
         time.sleep(1)
-        print('>>>>>> Database is getting the product list...')
+        print('>>>>>> Getting the products list...')
         time.sleep(3)
         print('--------------------------------------------------------------------')
         show_products()
@@ -157,49 +144,59 @@ while True:
 
     elif option == '2':
         item = input('Type The Serial Number: ')
-        print('Database is looking for the item...')
+        print('>>>>>> Loading product...')
         time.sleep(3)
+        print('--------------------------------------------------------------------')
         get_product(item)
+
     elif option == '3':
         item = input('Type the Serial Number: ')
-
         try:
             PRODUCTS[item]
-            print('Product already Registed.')
+            print('>>>>>> Product already Registed.')
         except KeyError:
             model, year, store = item_details()
+            print('--------------------------------------------------------------------')
             add_product(item, model, year, store)
+
     elif option == '4':
         item = input('Type the Serial Number: ')
-
         try:
             PRODUCTS[item]
-            print('>>>>>> Updating Item', item,'...')
+            print('>>>>>> Updating product', item,'...')
             model, year, store = item_details()
+            print('--------------------------------------------------------------------')
             add_product(item, model, year, store)
         except KeyError:
-            print('Product does not exist.')
+            print('>>>>>> Product does not exist.')
 
     elif option == '5':
         item = input('Type the Serial Number: ')
         time.sleep(0.5)
-        print('Database is looking for the item...')
+        print('>>>>>> Loading product...')
         time.sleep(3)
-        print('Deleting item...')
+        print('>>>>>> Deleting product...')
         time.sleep(2)
         delete_item(item)
+
     elif option == '6':
         filename = input('Type the Serial Number: ')
         export_items(filename)
+
     elif option == '7':
         filename = input('Type the Filename: ')
         import_items(filename)
+        
     elif option == '0':
         time.sleep(1)
         print('>>>>>> Finishing the application...')
         time.sleep(3)
-        print('>>>>>> The application was finished...')
+        print('>>>>>> The application was finished.')
         time.sleep(2)
         break
     else:
-        print('Type a Valide Number.')
+        time.sleep(1)
+        print('>>>>>> Type a valide number.')
+        time.sleep(2)
+        print('>>>>>> Look at the list and try to enter a valid value.')
+        time.sleep(3)

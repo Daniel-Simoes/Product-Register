@@ -1,3 +1,5 @@
+import time
+
 PRODUCTS = {}
 
 def show_products():
@@ -7,6 +9,7 @@ def show_products():
             
     else:
         print('-----------The application does not have any Registration!----------')
+        
 
 
 def get_product(item):
@@ -17,7 +20,7 @@ def get_product(item):
         print('Store: ', PRODUCTS[item]['store'])
         print('--------------------------------------------------------------------')
     except KeyError:
-        print('---------------------Serial Number has not found--------------------')
+        print('-----------------The serial number was not found--------------------')
     except Exception as error:
         print('----Sorry, We had a problem and the time are work to fix it soon----')
         print(error)
@@ -36,8 +39,13 @@ def add_product(item, model, year, store):
         'year': year,
         'store': store,
     }
+
+    print('---------------We are saving the item on database-------------------')
+    time.sleep(3)
     salve()
+    
     print('-------The Serial Number:{} was added successfully-------'.format(item))
+    time.sleep(2)
 
 
 def delete_item(item):
@@ -48,7 +56,7 @@ def delete_item(item):
         print('-------The Serial Number:{} was deleted successfully-------'.format(item))
         print()
     except KeyError:
-        print('---------------------Serial Number has not found--------------------')
+        print('---------------------Serial Number was not found--------------------')
     except Exception as error:
         print('----Sorry, We had a problem and the time are work to fix it soon----')
         print(error)
@@ -62,8 +70,8 @@ def export_items(filename):
                 store = PRODUCTS[item]['store']
                 
                 file.write(">>>Serial Number: {}\n Model: {}\n Year: {}\n Store: {}\n".format(item, model, year, store))
-
-        print('----------------Products was exported successfully------------------')
+        
+        #print('----------------The items was exported successfully-----------------')
     except Exception as error:
         print('----Sorry, We had a problem and the time are work to fix it soon----')
         print(error)
@@ -83,7 +91,7 @@ def import_items(filename):
 
                 add_product(item, model, year, store)
     except FileNotFoundError:
-        print('------------------------File was not found--------------------------')
+        print('--------------------The file was not found--------------------------')
     except Exception as error:
         print('----Sorry, We had a problem and the time are work to fix it soon----')
         print(error)
@@ -108,10 +116,10 @@ def load():
                     'year': year,
                     'store': store
                 }
-        print('------------------Database was loaded successfully------------------')
+        print('--------------The database was loaded successfully------------------')
         print('>>>> {} products loaded'.format(len(PRODUCTS)))
     except FileNotFoundError:
-        print('------------------------File was not found--------------------------')
+        print('--------------------The file was not found--------------------------')
     except Exception as error:
         print('----Sorry, We had a problem and the time are work to fix it soon----')
         print(error)
@@ -136,9 +144,16 @@ while True:
     option = input('CHOSE A OPTION: ')
 
     if option == '1':
+        time.sleep(0.5)
+        print('Database is loading the product list...')
+        time.sleep(3)
         show_products()
+        time.sleep(2)
     elif option == '2':
         item = input('Type The Serial Number: ')
+        time.sleep(0.5)
+        print('Database is loading the item...')
+        time.sleep(3)
         get_product(item)
     elif option == '3':
         item = input('Type the Serial Number: ')
@@ -162,6 +177,11 @@ while True:
 
     elif option == '5':
         item = input('Type the Serial Number: ')
+        time.sleep(0.5)
+        print('Database is looking for the item...')
+        time.sleep(3)
+        print('Deleting item...')
+        time.sleep(2)
         delete_item(item)
     elif option == '6':
         filename = input('Type the Serial Number: ')

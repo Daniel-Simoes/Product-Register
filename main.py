@@ -116,8 +116,12 @@ def load():
                     'year': year,
                     'store': store,
                 }
+        print('>>>>>> Loading database...')
+        time.sleep(3)
         print('>>>>>> The database was loaded successfully.')
+        time.sleep(2)
         print('>>>>>> {} products loaded.'.format(len(PRODUCTS)))
+        time.sleep(3)
     except FileNotFoundError:
         print('>>>>>> The file was not found.')
     except Exception as error:
@@ -144,11 +148,13 @@ while True:
     option = input('CHOSE A OPTION: ')
 
     if option == '1':
-        time.sleep(0.5)
-        print('>>>>>> Database is loading the product list...')
+        time.sleep(1)
+        print('>>>>>> Database is getting the product list...')
         time.sleep(3)
+        print('--------------------------------------------------------------------')
         show_products()
         time.sleep(2)
+
     elif option == '2':
         item = input('Type The Serial Number: ')
         print('Database is looking for the item...')
@@ -189,6 +195,11 @@ while True:
         filename = input('Type the Filename: ')
         import_items(filename)
     elif option == '0':
-        print('')
+        time.sleep(1)
+        print('>>>>>> Finishing the application...')
+        time.sleep(3)
+        print('>>>>>> The application was finished...')
+        time.sleep(2)
+        break
     else:
         print('Type a Valide Number.')
